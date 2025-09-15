@@ -9,63 +9,7 @@
 <body>
     <div class="app-container">
         <!-- Sidebar -->
-        <div class="sidebar">
-            <div class="sidebar-header">
-                <h1 class="sidebar-title">Hotel CMS</h1>
-                <p class="sidebar-subtitle">Website Content Management</p>
-            </div>
-            
-            <nav class="sidebar-nav" id="sidebar-nav">
-                <button class="nav-item active" data-section="overview">
-                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <line x1="12" y1="20" x2="12" y2="10"></line>
-                        <line x1="18" y1="20" x2="18" y2="4"></line>
-                        <line x1="6" y1="20" x2="6" y2="16"></line>
-                    </svg>
-                    <span>Overview</span>
-                </button>
-                <button class="nav-item" data-section="rooms">
-                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M2 4v16"></path>
-                        <path d="M2 8h18a2 2 0 0 1 2 2v10"></path>
-                        <path d="M2 17h20"></path>
-                        <path d="M6 8v9"></path>
-                    </svg>
-                    <span>Rooms</span>
-                </button>
-                <button class="nav-item" data-section="bookings">
-                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-                        <line x1="16" y1="2" x2="16" y2="6"></line>
-                        <line x1="8" y1="2" x2="8" y2="6"></line>
-                        <line x1="3" y1="10" x2="21" y2="10"></line>
-                    </svg>
-                    <span>Bookings</span>
-                </button>
-                <button class="nav-item" data-section="content">
-                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                        <polyline points="14,2 14,8 20,8"></polyline>
-                        <line x1="16" y1="13" x2="8" y2="13"></line>
-                        <line x1="16" y1="17" x2="8" y2="17"></line>
-                        <polyline points="10,9 9,9 8,9"></polyline>
-                    </svg>
-                    <span>Content</span>
-                </button>
-                <button class="nav-item" data-section="reviews">
-                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"></polygon>
-                    </svg>
-                    <span>Reviews</span>
-                </button>
-                <button class="nav-item" data-section="analytics">
-                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polyline points="22,12 18,12 15,21 9,3 6,12 2,12"></polyline>
-                    </svg>
-                    <span>Analytics</span>
-                </button>
-            </nav>
-        </div>
+        <?php include 'includes/sidebar.php' ?>
 
         <!-- Main Content -->
         <div class="main-content">
@@ -211,80 +155,15 @@
                 </div>
 
                 <!-- Rooms Section -->
-                <div class="section hidden" id="rooms-section">
-                    <div class="section-header">
-                        <h2>Room Management</h2>
-                        <button class="btn-primary">
-                            <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <line x1="12" y1="5" x2="12" y2="19"></line>
-                                <line x1="5" y1="12" x2="19" y2="12"></line>
-                            </svg>
-                            Add Room Type
-                        </button>
-                    </div>
-                    <div id="rooms-grid" class="rooms-grid">
-                        <!-- Will be populated by JavaScript -->
-                    </div>
-                </div>
+                 <?php include 'pages/rooms.php' ?>
+                <!-- Add Rooms Section -->
+                <?php include 'pages/addRoom.php' ?>
 
                 <!-- Bookings Section -->
-                <div class="section hidden" id="bookings-section">
-                    <div class="section-header">
-                        <h2>Booking Management</h2>
-                        <button class="btn-primary">
-                            <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <line x1="12" y1="5" x2="12" y2="19"></line>
-                                <line x1="5" y1="12" x2="19" y2="12"></line>
-                            </svg>
-                            New Booking
-                        </button>
-                    </div>
-                    
-                    <div class="search-container">
-                        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="11" cy="11" r="8"></circle>
-                            <path d="M21 21l-4.35-4.35"></path>
-                        </svg>
-                        <input type="text" id="booking-search" placeholder="Search bookings..." class="search-input">
-                    </div>
-
-                    <div class="card">
-                        <div class="table-container">
-                            <table class="data-table">
-                                <thead>
-                                    <tr>
-                                        <th>Guest</th>
-                                        <th>Room</th>
-                                        <th>Check-in</th>
-                                        <th>Check-out</th>
-                                        <th>Status</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="bookings-table-body">
-                                    <!-- Will be populated by JavaScript -->
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
+                <?php include 'pages/bookings.php' ?>
 
                 <!-- Content Section -->
-                <div class="section hidden" id="content-section">
-                    <div class="section-header">
-                        <h2>Website Content Management</h2>
-                        <button class="btn-primary">
-                            <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <line x1="12" y1="5" x2="12" y2="19"></line>
-                                <line x1="5" y1="12" x2="19" y2="12"></line>
-                            </svg>
-                            Create Page
-                        </button>
-                    </div>
-                    <div id="content-grid" class="content-grid">
-                        <!-- Will be populated by JavaScript -->
-                    </div>
-                </div>
+                <?php include 'pages/content.php' ?>
 
                 <!-- Reviews Section -->
                 <div class="section hidden" id="reviews-section">

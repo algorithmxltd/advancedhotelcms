@@ -59,6 +59,7 @@ const sidebarNav = document.getElementById('sidebar-nav');
 const sections = {
   overview: document.getElementById('overview-section'),
   rooms: document.getElementById('rooms-section'),
+  addRoom: document.getElementById('addroom-section'),
   bookings: document.getElementById('bookings-section'),
   content: document.getElementById('content-section'),
   reviews: document.getElementById('reviews-section'),
