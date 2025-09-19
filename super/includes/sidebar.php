@@ -1,7 +1,7 @@
 <div class="sidebar">
             <div class="sidebar-header">
-                <h1 class="sidebar-title">Hotel CMS</h1>
-                <p class="sidebar-subtitle">Website Content Management</p>
+                <h1 class="sidebar-title">Mt.Everest Hotel</h1>
+                <p class="sidebar-subtitle">Hotel Management</p>
             </div>
             
             <nav class="sidebar-nav" id="sidebar-nav">
@@ -21,6 +21,15 @@
                         <path d="M6 8v9"></path>
                     </svg>
                     <span>Rooms</span>
+                </button>
+                <button class="nav-item" data-section="addRoom">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M2 4v16"></path>
+                        <path d="M2 8h18a2 2 0 0 1 2 2v10"></path>
+                        <path d="M2 17h20"></path>
+                        <path d="M6 8v9"></path>
+                    </svg>
+                    <span>Add Room</span>
                 </button>
                 <button class="nav-item" data-section="bookings">
                     <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
