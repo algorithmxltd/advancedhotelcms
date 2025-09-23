@@ -1,0 +1,17 @@
+ /* Apply the Inter font family */
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Simple transition for buttons */
+        .btn-transition {
+            transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out, transform 0.1s ease-in-out;
+        }
+        /* Active state for button press effect */
+        .btn-transition:active {
+            transform: scale(0.98);
+        }
+        .form-input:focus + .form-label,
+        .form-input:not(:placeholder-shown) + .form-label {
+            transform: translateY(-1.75rem) scale(0.75);
+            color: #2563eb; /* Changed from green to blue */
+        }

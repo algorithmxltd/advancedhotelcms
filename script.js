@@ -165,17 +165,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// View All Rooms button
-document.addEventListener('DOMContentLoaded', function() {
-    const viewAllBtn = document.querySelector('.view-all-btn');
-    
-    if (viewAllBtn) {
-        viewAllBtn.addEventListener('click', function() {
-            // In a real application, this would navigate to the rooms page
-            alert('Would navigate to all rooms page in a real application.');
-        });
-    }
-});
+
 
 // Login button interactions
 document.addEventListener('DOMContentLoaded', function() {
@@ -240,7 +230,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     animatedElements.forEach(el => {
         el.style.opacity = '0';
-        el.style.transform = 'translateY(20px)';
+        el.style.transform = 'translateY(3px)';
         el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
         observer.observe(el);
     });

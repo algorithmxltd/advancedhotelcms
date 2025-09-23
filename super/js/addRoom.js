@@ -10,10 +10,8 @@ document.addEventListener('DOMContentLoaded', function () {
   let selectedFiles = [];
 
   // === File Upload Handling ===
-  // Browse button
   browseBtn.addEventListener('click', () => fileInput.click());
 
-  // File input
   fileInput.addEventListener('change', function () {
     selectedFiles = Array.from(fileInput.files).filter(file =>
       file.type.startsWith('image/')
@@ -21,7 +19,6 @@ document.addEventListener('DOMContentLoaded', function () {
     updatePreview();
   });
 
-  // Drag + drop
   dropZone.addEventListener('dragover', (e) => {
     e.preventDefault();
     dropZone.classList.add('dragover');
@@ -39,7 +36,6 @@ document.addEventListener('DOMContentLoaded', function () {
     updatePreview();
   });
 
-  // Preview function
   function updatePreview() {
     previewContainer.innerHTML = '';
     if (selectedFiles.length === 0) {
@@ -85,7 +81,7 @@ document.addEventListener('DOMContentLoaded', function () {
       previewContainer.appendChild(wrapper);
     });
 
-    // Sync selected files with input
+    // Sync input with selected files
     const dt = new DataTransfer();
     selectedFiles.forEach(file => dt.items.add(file));
     fileInput.files = dt.files;
@@ -96,16 +92,10 @@ document.addEventListener('DOMContentLoaded', function () {
     const box = document.getElementById('responseBox');
     const msg = document.getElementById('responseMessage');
 
-    msg.textContent = message;
+    msg.textContent = message; // display only message
 
-    // reset classes
-    box.className = 'response-container';
-
-    if (statusCode === 200) {
-      box.classList.add('response-success');
-    } else {
-      box.classList.add('response-error');
-    }
+    box.className = 'response-container'; // reset
+    box.classList.add(statusCode === 200 ? 'response-success' : 'response-error');
 
     box.style.display = 'block';
   }
@@ -114,36 +104,33 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('responseBox').style.display = 'none';
   }
 
-  // Close button
   if (closeBtn) {
     closeBtn.addEventListener('click', hideResponse);
   }
 
   // === Form Submission ===
-  submitBtn.addEventListener('click', function (e) {
-    e.preventDefault();
+  // === Form Submission ===
+submitBtn.addEventListener('click', function (e) {
+  e.preventDefault();
 
-    const formData = new FormData(form);
+  const formData = new FormData(form);
 
-    fetch('processing/addRoom.php', {
-      method: 'POST',
-      body: formData
+  fetch('processing/addRoom.php', {
+    method: 'POST',
+    body: formData
+  })
+    .then(res => res.json()) // parse JSON
+    .then(data => {
+      showResponse(data.message, data.status);
+
+      if (data.success && data.status === 200) {
+        previewContainer.innerHTML = '';
+        selectedFiles = [];
+      }
     })
-      .then(res => {
-        if (res.status === 200) {
-          return res.text().then(data => {
-            showResponse('Success: ' + data, 200);
-            previewContainer.innerHTML = '';
-            selectedFiles = [];
-          });
-        } else {
-          return res.text().then(err => {
-            showResponse('Error: ' + err, res.status);
-          });
-        }
-      })
-      .catch(err => {
-        showResponse('Network Error: ' + err, 500);
-      });
-  });
+    .catch(err => {
+      showResponse('Network Error: ' + err, 500);
+    });
+});
+
 });

@@ -1,7 +1,7 @@
 <?php
 // Database connection
 $host = 'localhost';
-$dbname = 'madinafc';
+$dbname = 'mteverest';
 $username = 'root';
 $password = 'Zulu2003mysql';
 

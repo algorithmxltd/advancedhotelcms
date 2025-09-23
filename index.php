@@ -3,73 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mt Everest Hotel - Experience Luxury at the Peak</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Mt Everest Hotel</title>
+    <link rel="stylesheet" href="styles/styles.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.1/lucide.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script src="https://kit.fontawesome.com/e4c074505f.js" crossorigin="anonymous"></script>
+
 </head>
 <body>
     <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="nav-content">
-                <!-- Logo -->
-                <div class="nav-logo">
-                    <h1>Mt Everest Hotel</h1>
-                </div>
-
-                <!-- Desktop Navigation -->
-                <div class="nav-desktop">
-                    <div class="nav-item dropdown">
-                        <button class="nav-link">Rooms</button>
-                        <div class="dropdown-menu">
-                            <a href="#" class="dropdown-item">Executive Rooms</a>
-                            <a href="#" class="dropdown-item">Standard Rooms</a>
-                        </div>
-                    </div>
-                    <a href="#" class="nav-link">
-                        <span class="heart-icon">♡</span>
-                        Favourites
-                    </a>
-                    <a href="#" class="nav-link">About Us</a>
-                    <a href="#" class="nav-link">Contacts</a>
-                </div>
-
-                <!-- Login Button -->
-                <div class="nav-login">
-                    <button class="login-btn">
-                        <span class="user-icon">👤</span>
-                        Login
-                    </button>
-                </div>
-
-                <!-- Mobile menu button -->
-                <div class="mobile-menu-btn">
-                    <button id="menu-toggle">
-                        <span class="menu-icon">☰</span>
-                        <span class="close-icon hidden">✕</span>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Mobile Navigation -->
-            <div id="mobile-menu" class="mobile-nav hidden">
-                <div class="mobile-nav-content">
-                    <a href="#" class="mobile-nav-link">Executive Rooms</a>
-                    <a href="#" class="mobile-nav-link">Standard Rooms</a>
-                    <a href="#" class="mobile-nav-link">
-                        <span class="heart-icon">♡</span>
-                        Favourites
-                    </a>
-                    <a href="#" class="mobile-nav-link">About Us</a>
-                    <a href="#" class="mobile-nav-link">Contacts</a>
-                    <button class="mobile-login-btn">
-                        <span class="user-icon">👤</span>
-                        Login
-                    </button>
-                </div>
-            </div>
-        </div>
-    </nav>
+    <?php include 'includes/navbar.php' ?>
 
     <!-- Hero Section -->
     <section class="hero">
@@ -140,136 +83,131 @@
     </section>
 
     <!-- Featured Rooms -->
-    <section class="featured-rooms">
-        <div class="container">
-            <div class="section-header">
-                <h2>Featured Rooms</h2>
-                <p>Discover comfort and luxury in every room</p>
+<?php
+require_once 'includes/db_connect.php';
+define("BASE_URL", "/mteverest2");
+
+// Fetch 2 executive rooms
+$execQuery = "SELECT * FROM rooms WHERE roomType = 'Executive' LIMIT 2";
+$execResult = mysqli_query($conn, $execQuery);
+
+// Fetch 2 standard rooms
+$stdQuery = "SELECT * FROM rooms WHERE roomType = 'Standard' LIMIT 2";
+$stdResult = mysqli_query($conn, $stdQuery);
+
+function renderRoomCard($room)
+{
+    global $conn;
+
+    // Get up to 4 images for this room
+    $roomId = intval($room['id']);
+    $imgQuery = "SELECT imagePath FROM roomImages WHERE roomId = $roomId LIMIT 4";
+    $imgResult = mysqli_query($conn, $imgQuery);
+
+    $slides = '';
+    if ($imgResult && mysqli_num_rows($imgResult) > 0) {
+        while ($img = mysqli_fetch_assoc($imgResult)) {
+            $slides .= '
+                <div class="swiper-slide">
+                    <img src="' . BASE_URL . htmlspecialchars($img['imagePath']) . '" alt="Room Image">
+                </div>';
+        }
+    } else {
+        // Fallback default image
+        $slides = '
+            <div class="swiper-slide">
+                <img src="assets/default-room.jpg" alt="Default Room">
+            </div>';
+    }
+
+    return '
+
+    <div class="room-card">
+    <a href="room.php?id=' . urlencode($room['id']) . '" class="room-link">
+        <div class="room-image">
+            <!-- Swiper -->
+            <div class="swiper room-swiper">
+                <div class="swiper-wrapper">
+                    ' . $slides . '
+                </div>
+                <!-- Swiper navigation -->
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-pagination"></div>
             </div>
-
-            <div class="rooms-grid">
-                <!-- Room 1 -->
-                <div class="room-card">
-                    <div class="room-image">
-                        <img src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Executive Mountain Suite">
-                        <div class="room-badge executive">Executive</div>
-                        <div class="room-price">
-                            <span class="price">$299</span>
-                            <span class="period">/night</span>
-                        </div>
-                    </div>
-                    <div class="room-content">
-                        <h3>Executive Mountain Suite</h3>
-                        <p>Luxurious suite with panoramic mountain views and premium amenities.</p>
-                        <div class="room-amenities">
-                            <span class="amenity">Mountain View</span>
-                            <span class="amenity">King Bed</span>
-                            <span class="amenity">Balcony</span>
-                            <span class="amenity">Mini Bar</span>
-                        </div>
-                        <div class="room-icons">
-                            <span class="icon">🏔️</span>
-                            <span class="icon">📶</span>
-                            <span class="icon">☕</span>
-                            <span class="icon">📺</span>
-                        </div>
-                        <button class="book-btn">Book Now</button>
-                    </div>
-                </div>
-
-                <!-- Room 2 -->
-                <div class="room-card">
-                    <div class="room-image">
-                        <img src="https://images.unsplash.com/photo-1618773928121-c32242e63f39?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Executive Valley View">
-                        <div class="room-badge executive">Executive</div>
-                        <div class="room-price">
-                            <span class="price">$249</span>
-                            <span class="period">/night</span>
-                        </div>
-                    </div>
-                    <div class="room-content">
-                        <h3>Executive Valley View</h3>
-                        <p>Elegant room perfect for business travelers with stunning valley views.</p>
-                        <div class="room-amenities">
-                            <span class="amenity">Valley View</span>
-                            <span class="amenity">Queen Bed</span>
-                            <span class="amenity">Workspace</span>
-                            <span class="amenity">Premium Bath</span>
-                        </div>
-                        <div class="room-icons">
-                            <span class="icon">🛁</span>
-                            <span class="icon">📶</span>
-                            <span class="icon">☕</span>
-                            <span class="icon">🚗</span>
-                        </div>
-                        <button class="book-btn">Book Now</button>
-                    </div>
-                </div>
-
-                <!-- Room 3 -->
-                <div class="room-card">
-                    <div class="room-image">
-                        <img src="https://images.unsplash.com/photo-1590490360182-c33d57733427?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Standard Garden Room">
-                        <div class="room-badge standard">Standard</div>
-                        <div class="room-price">
-                            <span class="price">$149</span>
-                            <span class="period">/night</span>
-                        </div>
-                    </div>
-                    <div class="room-content">
-                        <h3>Standard Garden Room</h3>
-                        <p>Comfortable and cozy room with beautiful garden views.</p>
-                        <div class="room-amenities">
-                            <span class="amenity">Garden View</span>
-                            <span class="amenity">Double Bed</span>
-                            <span class="amenity">Ensuite Bath</span>
-                            <span class="amenity">Free WiFi</span>
-                        </div>
-                        <div class="room-icons">
-                            <span class="icon">📶</span>
-                            <span class="icon">📺</span>
-                            <span class="icon">☕</span>
-                            <span class="icon">🛁</span>
-                        </div>
-                        <button class="book-btn">Book Now</button>
-                    </div>
-                </div>
-
-                <!-- Room 4 -->
-                <div class="room-card">
-                    <div class="room-image">
-                        <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Standard Twin Room">
-                        <div class="room-badge standard">Standard</div>
-                        <div class="room-price">
-                            <span class="price">$129</span>
-                            <span class="period">/night</span>
-                        </div>
-                    </div>
-                    <div class="room-content">
-                        <h3>Standard Twin Room</h3>
-                        <p>Perfect for friends or colleagues traveling together.</p>
-                        <div class="room-amenities">
-                            <span class="amenity">Twin Beds</span>
-                            <span class="amenity">City View</span>
-                            <span class="amenity">Shared Bath</span>
-                            <span class="amenity">Basic Amenities</span>
-                        </div>
-                        <div class="room-icons">
-                            <span class="icon">📶</span>
-                            <span class="icon">📺</span>
-                            <span class="icon">☕</span>
-                            <span class="icon">🚗</span>
-                        </div>
-                        <button class="book-btn">Book Now</button>
-                    </div>
-                </div>
+            <div class="room-badge ' . strtolower(htmlspecialchars($room['roomType'])) . '">'
+                . htmlspecialchars($room['roomType']) . '
             </div>
-
-            <div class="view-all">
-                <button class="view-all-btn">View All Rooms</button>
-            </div>
+            <i class="fa-regular fa-heart"></i>
         </div>
-    </section>
+        <div class="room-content">
+            <div class="room-price">
+                <span class="price">Ksh ' . number_format((float)$room['roomPrice'], 0, '.', ',') . '</span>
+                <span class="period">/night</span>
+            </div>
+            <p>' . htmlspecialchars($room['roomBriefDescription']) . '</p>
+            <div class="room-amenities">' . htmlspecialchars($room['roomAmenities']) . '</div>
+            <div class="room-icons">' . htmlspecialchars($room['amenitiesEmojies']) . '</div>
+            <button class="book-btn">Book Now</button>
+        </div>
+        </a>
+    </div>';
+
+}
+?>
+
+<!-- Featured Rooms -->
+<section class="featured-rooms">
+    <div class="container">
+        <div class="section-header">
+            <h2>Featured Rooms</h2>
+            <p>Discover comfort and luxury in every room</p>
+        </div>
+
+        <div class="rooms-grid">
+            <?php 
+            if ($execResult) {
+                while ($row = mysqli_fetch_assoc($execResult)) {
+                    echo renderRoomCard($row);
+                }
+            }
+            if ($stdResult) {
+                while ($row = mysqli_fetch_assoc($stdResult)) {
+                    echo renderRoomCard($row);
+                }
+            }
+            ?>
+        </div>
+
+        <div class="view-all">
+            <a href="rooms.php"><button class="view-all-btn">View All Rooms</button></a>
+        </div>
+    </div>
+</section>
+
+<!-- Swiper JS (make sure to include Swiper library in your page) -->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const swipers = document.querySelectorAll('.room-swiper');
+    swipers.forEach(swiperEl => {
+        new Swiper(swiperEl, {
+            loop: true,
+            slidesPerView: 1,
+            spaceBetween: 10,
+            pagination: {
+                el: swiperEl.querySelector('.swiper-pagination'),
+                clickable: true,
+            },
+            navigation: {
+                nextEl: swiperEl.querySelector('.swiper-button-next'),
+                prevEl: swiperEl.querySelector('.swiper-button-prev'),
+            },
+        });
+    });
+});
+</script>
+
+
 
     <!-- Marketing Content -->
     <section class="marketing-content">
@@ -612,149 +550,10 @@
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <!-- Feedback Form Section -->
-        <div class="feedback-form-section">
-            <div class="container">
-                <div class="feedback-grid">
-                    <div class="feedback-content">
-                        <div class="feedback-text">
-                            <h2>Share Your Experience</h2>
-                            <p>Your feedback helps us create unforgettable experiences for all our guests. Let us know how we can serve you better.</p>
-                        </div>
-                        
-                        <div class="feedback-rating">
-                            <div class="rating-stars">★★★★★</div>
-                            <span>4.9 out of 5 stars</span>
-                        </div>
-                    </div>
-
-                    <div class="feedback-form-card">
-                        <h3>Send Us Your Feedback</h3>
-                        <form class="feedback-form">
-                            <div class="form-row">
-                                <div class="form-field">
-                                    <label>Name</label>
-                                    <input type="text" placeholder="Your name">
-                                </div>
-                                <div class="form-field">
-                                    <label>Email</label>
-                                    <input type="email" placeholder="your@email.com">
-                                </div>
-                            </div>
-                            
-                            <div class="form-field">
-                                <label>Rating</label>
-                                <div class="rating-input">
-                                    <span class="star" data-rating="1">☆</span>
-                                    <span class="star" data-rating="2">☆</span>
-                                    <span class="star" data-rating="3">☆</span>
-                                    <span class="star" data-rating="4">☆</span>
-                                    <span class="star" data-rating="5">☆</span>
-                                </div>
-                            </div>
-                            
-                            <div class="form-field">
-                                <label>Your Feedback</label>
-                                <textarea placeholder="Tell us about your experience..." rows="4"></textarea>
-                            </div>
-                            
-                            <button type="submit" class="submit-btn">
-                                <span class="send-icon">📤</span>
-                                Submit Feedback
-                            </button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Main Footer -->
-        <div class="main-footer">
-            <div class="container">
-                <div class="footer-grid">
-                    <!-- Hotel Info -->
-                    <div class="footer-section">
-                        <div class="footer-logo">
-                            <span class="mountain-icon">🏔️</span>
-                            <h3>Mt Everest Hotel</h3>
-                        </div>
-                        <p>Experience luxury and adventure at the roof of the world. Where every stay is an unforgettable journey.</p>
-                        <div class="social-links">
-                            <a href="#" class="social-link facebook">📘</a>
-                            <a href="#" class="social-link instagram">📷</a>
-                            <a href="#" class="social-link twitter">🐦</a>
-                            <a href="#" class="social-link youtube">📺</a>
-                        </div>
-                    </div>
-
-                    <!-- Quick Links -->
-                    <div class="footer-section">
-                        <h4>Quick Links</h4>
-                        <div class="footer-links">
-                            <a href="#">Executive Rooms</a>
-                            <a href="#">Standard Rooms</a>
-                            <a href="#">Amenities</a>
-                            <a href="#">Dining</a>
-                            <a href="#">Spa & Wellness</a>
-                            <a href="#">Activities</a>
-                        </div>
-                    </div>
-
-                    <!-- Services -->
-                    <div class="footer-section">
-                        <h4>Services</h4>
-                        <div class="footer-links">
-                            <a href="#">Room Service</a>
-                            <a href="#">Concierge</a>
-                            <a href="#">Airport Transfer</a>
-                            <a href="#">Tour Packages</a>
-                            <a href="#">Equipment Rental</a>
-                            <a href="#">Medical Assistance</a>
-                        </div>
-                    </div>
-
-                    <!-- Contact Info -->
-                    <div class="footer-section">
-                        <h4>Contact Us</h4>
-                        <div class="contact-info">
-                            <div class="contact-item">
-                                <span class="contact-icon">📍</span>
-                                <div>
-                                    <p>Everest Base Camp Region</p>
-                                    <p>Solukhumbu District, Nepal</p>
-                                </div>
-                            </div>
-                            <div class="contact-item">
-                                <span class="contact-icon">📞</span>
-                                <span>+977-1-234-5678</span>
-                            </div>
-                            <div class="contact-item">
-                                <span class="contact-icon">✉️</span>
-                                <span>info@mteveresthotel.com</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Bottom Bar -->
-        <div class="footer-bottom">
-            <div class="container">
-                <div class="bottom-content">
-                    <p>&copy; 2025 Mt Everest Hotel. All rights reserved.</p>
-                    <div class="legal-links">
-                        <a href="#">Privacy Policy</a>
-                        <a href="#">Terms of Service</a>
-                        <a href="#">Cookie Policy</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
-
+    
+<?php include 'includes/footer.php' ?>
     <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
 </body>
 </html>

@@ -5,18 +5,16 @@ $dbFile = __DIR__ . '/../../includes/db_connect.php';
 if (file_exists($dbFile)) {
     require_once $dbFile;
 } else {
-    // Return JSON error response
     http_response_code(500);
     echo json_encode([
-        "status" => "error",
+        "success" => false,
+        "status"  => 500,
         "message" => "Database connection file not found."
     ]);
     exit;
 }
 
-
 $conn->set_charset("utf8mb4");
-
 ini_set('display_errors', 1);
 ini_set('log_errors', 1);
 error_reporting(E_ALL);
@@ -73,14 +71,9 @@ function compressImageIfLargerThan($tmpPath, $destinationPath, $maxSizeKB = 800)
 $data = $_POST;
 $files = $_FILES;
 
-// Debugging
-file_put_contents('debug_data.log', print_r($data, true));
-file_put_contents('debug_files.log', print_r($files, true));
-
 // === REQUIRED FIELDS ===
 $required = ['roomPrice', 'roomNumber', 'roomType'];
 $missing = [];
-
 foreach ($required as $field) {
     if (empty($data[$field])) {
         $missing[] = $field;
@@ -88,12 +81,13 @@ foreach ($required as $field) {
 }
 
 if (!empty($missing)) {
+    http_response_code(400);
     log_error("Missing fields: " . implode(', ', $missing));
     echo json_encode([
         'success' => false,
-        'status' => '400',
+        'status'  => 400,
         'message' => 'Missing required fields',
-        'fields' => $missing
+        'fields'  => $missing
     ]);
     exit;
 }
@@ -107,74 +101,103 @@ $roomAmenities         = trim($data['roomAmenities'] ?? '');
 $amenitiesEmojies      = trim($data['amenitiesEmojies'] ?? '');
 $additionalDescription = trim($data['additionalDescription'] ?? '');
 
-// === INSERT ROOM ===
-$stmt = $conn->prepare("INSERT INTO rooms (roomPrice, roomNumber, roomType, roomBriefDescription, roomAmenities, amenitiesEmojies, additionalDescription) VALUES (?, ?, ?, ?, ?, ?, ?)");
-if (!$stmt) {
-    log_error("DB prepare error: " . $conn->error);
-    echo json_encode(['success' => false, 'message' => 'DB error']);
+// === CHECK UNIQUE ROOM NUMBER ===
+$stmtCheck = $conn->prepare("SELECT id FROM rooms WHERE roomNumber = ? LIMIT 1");
+$stmtCheck->bind_param("s", $roomNumber);
+$stmtCheck->execute();
+$result = $stmtCheck->get_result();
+if ($result && $result->num_rows > 0) {
+    echo json_encode([
+        'success' => false,
+        'status'  => 409,
+        'message' => "Room number '$roomNumber' already exists. Please edit that room or choose another number."
+    ]);
     exit;
 }
+$stmtCheck->close();
 
-$stmt->bind_param("dssssss", $roomPrice, $roomNumber, $roomType, $roomBriefDescription, $roomAmenities, $amenitiesEmojies, $additionalDescription);
+// === START TRANSACTION ===
+$conn->begin_transaction();
 
-if (!$stmt->execute()) {
-    log_error("DB execution error: " . $stmt->error);
-    echo json_encode(['success' => false, 'message' => 'Failed to save room']);
-    exit;
-}
+try {
+    // Insert room
+    $stmt = $conn->prepare("INSERT INTO rooms (roomPrice, roomNumber, roomType, roomBriefDescription, roomAmenities, amenitiesEmojies, additionalDescription) VALUES (?, ?, ?, ?, ?, ?, ?)");
+    if (!$stmt) {
+        throw new Exception("DB prepare error: " . $conn->error);
+    }
 
-$roomId = $conn->insert_id;
-$stmt->close();
+    $stmt->bind_param("dssssss", $roomPrice, $roomNumber, $roomType, $roomBriefDescription, $roomAmenities, $amenitiesEmojies, $additionalDescription);
 
-// === HANDLE MULTIPLE IMAGE UPLOADS ===
-$imagePaths = [];
-if (!empty($files['roomPhotos']['name'][0])) {
-    $uploadDir = $_SERVER['DOCUMENT_ROOT'] . '/uploads/rooms/';
-    if (!is_dir($uploadDir)) {
-        if (!mkdir($uploadDir, 0777, true)) {
-            log_error("Failed to create upload directory");
-            echo json_encode(['success' => false, 'message' => 'Upload directory error']);
-            exit;
+    if (!$stmt->execute()) {
+        throw new Exception("DB execution error: " . $stmt->error);
+    }
+
+    $roomId = $conn->insert_id;
+    $stmt->close();
+
+    // Handle images
+    $imagePaths = [];
+    if (!empty($files['roomPhotos']['name'][0])) {
+        $uploadDir = __DIR__ . '/../../uploads/rooms/';
+        if (!is_dir($uploadDir)) {
+            if (!mkdir($uploadDir, 0777, true)) {
+                throw new Exception("Failed to create upload directory: $uploadDir (user: " . get_current_user() . ")");
+            }
+        }
+
+        foreach ($files['roomPhotos']['tmp_name'] as $index => $tmpName) {
+            if ($files['roomPhotos']['error'][$index] !== UPLOAD_ERR_OK) continue;
+
+            $originalName = basename($files['roomPhotos']['name'][$index]);
+            $ext = strtolower(pathinfo($originalName, PATHINFO_EXTENSION));
+            $allowed = ['jpg', 'jpeg', 'png', 'webp'];
+
+            if (!in_array($ext, $allowed)) {
+                throw new Exception("Invalid image extension: $ext");
+            }
+
+            $newName = 'room_' . $roomId . '_' . time() . '_' . uniqid() . '.' . $ext;
+            $destination = $uploadDir . $newName;
+
+            if (!compressImageIfLargerThan($tmpName, $destination)) {
+                throw new Exception("Image compression failed: $originalName");
+            }
+
+            $relativePath = '/uploads/rooms/' . $newName;
+            $imagePaths[] = $relativePath;
+
+            $stmtImg = $conn->prepare("INSERT INTO roomImages (roomId, imagePath) VALUES (?, ?)");
+            if (!$stmtImg) {
+                throw new Exception("DB prepare error (images): " . $conn->error);
+            }
+            $stmtImg->bind_param("is", $roomId, $relativePath);
+            if (!$stmtImg->execute()) {
+                throw new Exception("DB execution error (images): " . $stmtImg->error);
+            }
+            $stmtImg->close();
         }
     }
 
-    foreach ($files['roomPhotos']['tmp_name'] as $index => $tmpName) {
-        if ($files['roomPhotos']['error'][$index] !== UPLOAD_ERR_OK) continue;
+    // Commit if everything is fine
+    $conn->commit();
 
-        $originalName = basename($files['roomPhotos']['name'][$index]);
-        $ext = strtolower(pathinfo($originalName, PATHINFO_EXTENSION));
-        $allowed = ['jpg', 'jpeg', 'png', 'webp'];
+    echo json_encode([
+        'success' => true,
+        'status'  => 200,
+        'message' => 'Room added successfully',
+        'room_id' => $roomId,
+        'images'  => $imagePaths
+    ]);
 
-        if (!in_array($ext, $allowed)) {
-            log_error("Invalid image extension: $ext");
-            continue;
-        }
-
-        $newName = 'room_' . $roomId . '_' . time() . '_' . uniqid() . '.' . $ext;
-        $destination = $uploadDir . $newName;
-
-        if (!compressImageIfLargerThan($tmpName, $destination)) {
-            log_error("Image compression failed: $originalName");
-            continue;
-        }
-
-        $relativePath = '/uploads/rooms/' . $newName;
-        $imagePaths[] = $relativePath;
-
-        // Save to DB
-        $stmtImg = $conn->prepare("INSERT INTO roomImages (roomId, imagePath) VALUES (?, ?)");
-        $stmtImg->bind_param("is", $roomId, $relativePath);
-        $stmtImg->execute();
-        $stmtImg->close();
-    }
+} catch (Exception $e) {
+    $conn->rollback();
+    http_response_code(500);
+    log_error($e->getMessage());
+    echo json_encode([
+        'success' => false,
+        'status'  => 500,
+        'message' => 'Error: ' . $e->getMessage()
+    ]);
 }
-
-echo json_encode([
-    'success' => true,
-    'message' => 'Room added successfully',
-    'room_id' => $roomId,
-    'images' => $imagePaths
-]);
 
 $conn->close();
-?>

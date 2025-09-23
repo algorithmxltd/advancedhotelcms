@@ -1,0 +1,12 @@
+[2025-09-19 08:00:52] Missing fields: roomPrice, roomNumber
+[2025-09-19 08:01:43] Missing fields: roomPrice, roomNumber, roomType
+[2025-09-19 08:18:29] Missing fields: roomPrice, roomNumber, roomType
+[2025-09-19 08:18:36] Missing fields: roomPrice, roomNumber, roomType
+[2025-09-19 08:24:31] Missing fields: roomPrice, roomNumber, roomType
+[2025-09-19 08:24:34] Missing fields: roomPrice, roomNumber, roomType
+[2025-09-19 08:33:28] Failed to create upload directory
+[2025-09-19 08:34:32] Failed to create upload directory
+[2025-09-19 08:35:53] Failed to create upload directory
+[2025-09-19 08:37:57] Failed to create upload directory: /usr/local/var/www/uploads/rooms/
+[2025-09-19 08:38:09] Failed to create upload directory: /usr/local/var/www/uploads/rooms/
+[2025-09-19 08:51:53] Missing fields: roomPrice, roomNumber, roomType

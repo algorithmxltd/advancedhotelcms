@@ -23,7 +23,7 @@
     </div>
 
     <div class="form-group">
-      <label for="roomPrice">Room Price</label>
+      <label for="roomPrice">Room Price / Night</label>
       <input id="roomPrice" name="roomPrice" type="number" placeholder="Price per night in Ksh" required>
     </div>
 
