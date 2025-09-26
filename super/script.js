@@ -21,12 +21,6 @@ const hotelData = {
     { id: 4, guest: 'Emily Wilson', room: 'Presidential Suite', time: '6:00 PM', nights: 5 }
   ],
 
-  rooms: [
-    { id: 1, name: 'Standard Room', type: 'STD', price: 120, available: 8, total: 15, status: 'Active', rating: 4.2 },
-    { id: 2, name: 'Deluxe Suite', type: 'DLX', price: 250, available: 3, total: 10, status: 'Active', rating: 4.7 },
-    { id: 3, name: 'Ocean View', type: 'OCV', price: 180, available: 5, total: 12, status: 'Active', rating: 4.5 },
-    { id: 4, name: 'Presidential Suite', type: 'PRES', price: 500, available: 1, total: 2, status: 'Active', rating: 4.9 }
-  ],
 
   bookings: [
     { id: 1, guest: 'Alice Thompson', email: 'alice@email.com', room: 'Deluxe Suite', checkin: '2025-07-28', checkout: '2025-07-31', status: 'Confirmed' },
@@ -148,47 +142,7 @@ function renderActivities() {
   container.innerHTML = html;
 }
 
-function renderRooms() {
-  const container = document.getElementById('rooms-grid');
-  const html = hotelData.rooms.map(room => {
-    const occupancyPercentage = ((room.total - room.available) / room.total) * 100;
-    return `
-      <div class="room-card">
-        <div class="room-header">
-          <div class="room-info">
-            <h3>${room.name}</h3>
-            <div class="room-type">${room.type}</div>
-          </div>
-          <div class="room-status">${room.status}</div>
-        </div>
-        <div class="room-details">
-          <div class="room-detail">
-            <span>Price per night:</span>
-            <span class="room-detail-value">$${room.price}</span>
-          </div>
-          <div class="room-detail">
-            <span>Available:</span>
-            <span class="room-detail-value">${room.available}/${room.total}</span>
-          </div>
-          <div class="room-detail">
-            <span>Rating:</span>
-            <div class="rating">
-              <svg class="star-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"></polygon>
-              </svg>
-              <span class="room-detail-value">${room.rating}</span>
-            </div>
-          </div>
-          <div class="progress-bar">
-            <div class="progress-fill" style="width: ${occupancyPercentage}%"></div>
-          </div>
-          <button class="btn-outline">Manage Room</button>
-        </div>
-      </div>
-    `;
-  }).join('');
-  container.innerHTML = html;
-}
+
 
 function renderBookings() {
   const container = document.getElementById('bookings-table-body');
@@ -309,7 +263,7 @@ function initializeEventListeners() {
       
       // Render section-specific content
       if (navItem.dataset.section === 'rooms') {
-        renderRooms();
+        
       } else if (navItem.dataset.section === 'bookings') {
         renderBookings();
       } else if (navItem.dataset.section === 'content') {
