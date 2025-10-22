@@ -114,6 +114,15 @@ submitBtn.addEventListener('click', function (e) {
   e.preventDefault();
 
   const formData = new FormData(form);
+  //formdata
+  const debugData = {};
+        for (const [key, value] of formData.entries()) {
+            debugData[key] = value instanceof File
+                ? { name: value.name, size: value.size, type: value.type }
+                : value;
+        }
+        console.log('Uploading room data:', JSON.stringify(debugData, null, 2));
+
 
   fetch('processing/addRoom.php', {
     method: 'POST',

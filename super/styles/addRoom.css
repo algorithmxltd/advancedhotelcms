@@ -7,6 +7,9 @@ form {
     display: flex;
     flex-direction: column;
 }
+.more-actions{
+    margin-top: 50px;
+}
 
 .form-group #fullDescription{
     height: 250px;
@@ -14,6 +17,10 @@ form {
 }
 .submit-btn{
     width: 60% !important;
+}
+
+.delete-room-btn{
+    background: #ff0037 !important;
 }
 
 .upload-area{

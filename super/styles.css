@@ -111,6 +111,10 @@ p {
   gap: 0.5rem;
 }
 
+nav a{
+  text-decoration: none;
+}
+
 .nav-item {
   display: flex;
   align-items: center;
