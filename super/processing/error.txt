@@ -1,0 +1,3 @@
+[2025-10-22 09:31:10] Missing fields: roomPrice, roomNumber, roomType
+[2025-10-22 09:31:32] Missing fields: roomPrice, roomNumber, roomType
+[2025-10-22 10:04:58] Missing fields: roomPrice, roomNumber, roomType

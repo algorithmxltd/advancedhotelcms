@@ -12,11 +12,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
   let selectedFiles = [];
 
-  // === Get Room ID from URL ===
-  const urlParams = new URLSearchParams(window.location.search);
-  const roomId = urlParams.get('id');
-  console.log('This is the room ID:', roomId);
-
   // === Confirmation Modal ===
   function showConfirm(message, confirmCallback) {
     const existing = document.getElementById('confirm-box');
@@ -133,6 +128,8 @@ document.addEventListener('DOMContentLoaded', function () {
       showConfirm('Delete this image?', (confirmed) => {
         if (!confirmed) return;
 
+        const roomId = form.querySelector('input[name="roomId"]').value;
+
         fetch(endpoint, {
           method: 'POST',
           body: new URLSearchParams({ action: 'deleteImage', imageId, roomId })
@@ -227,11 +224,11 @@ document.addEventListener('DOMContentLoaded', function () {
     e.preventDefault();
 
     const formData = new FormData(form);
-    formData.append('roomId', roomId);
+    const roomId = form.querySelector('input[name="roomId"]').value;
     formData.append('action', 'updateDetails');
 
     if (selectedFiles.length > 0) {
-      selectedFiles.forEach(file => formData.append('newImages[]', file));
+      selectedFiles.forEach(file => formData.append('roomPhotos[]', file));
     }
 
     const debugData = {};
@@ -250,6 +247,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // === Delete Entire Room ===
   deleteRoomBtn?.addEventListener('click', () => {
+    const roomId = form.querySelector('input[name="roomId"]').value;
+
     showConfirm('Are you sure you want to delete this room?', (confirmed) => {
       if (!confirmed) return;
 

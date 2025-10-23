@@ -48,7 +48,7 @@ while ($img = mysqli_fetch_assoc($imageQuery)) {
                 </div>
 
         <form id="editRoomForm" enctype="multipart/form-data">
-          <input type="hidden" name="roomId" value="<?php echo $roomId; ?>">
+         <input type="hidden" name="roomId" value="<?php echo $roomId; ?>">
 
           <!-- Room Photos -->
           <div class="form-group">
