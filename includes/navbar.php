@@ -19,8 +19,8 @@
                         <span class="heart-icon">♡</span>
                         Favourites
                     </a>
-                    <a href="#" class="nav-link">About Us</a>
-                    <a href="#" class="nav-link">Contacts</a>
+                    <a href="about.php" class="nav-link">About Us</a>
+                    <a href="contacts.php" class="nav-link">Contacts</a>
                 </div>
 
                 <!-- Login Button -->
