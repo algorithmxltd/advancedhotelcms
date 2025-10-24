@@ -198,7 +198,7 @@ switch ($action) {
             $stmtDel->execute();
             $stmtDel->close();
 
-            echo json_encode(["success" => true, "message" => "Image deleted successfully."]);
+            echo json_encode(["success" => true, "status"  => 200 ,"message" => "Image deleted successfully."]);
         } else {
             echo json_encode(["success" => false, "message" => "Image not found."]);
         }

@@ -1,0 +1,14 @@
+# Enable URL rewriting
+RewriteEngine On
+
+# Remove .php extension from URLs
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.php -f
+RewriteRule ^(.*)$ $1.php [L]
+
+# Optional: Redirect requests with .php in URL to clean URL
+RewriteCond %{THE_REQUEST} \s/+(.+?)\.php[\s?] [NC]
+RewriteRule ^ /%1 [R=301,L]
+
+# Optional: Disable directory listing
+Options -Indexes

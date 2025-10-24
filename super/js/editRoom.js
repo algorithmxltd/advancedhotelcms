@@ -110,8 +110,8 @@ document.addEventListener('DOMContentLoaded', function () {
     updatePreview();
   });
 
-  // === Existing Image Delete (STATIC IMAGES RENDERED BY PHP) ===
-  document.querySelectorAll('.delete-image').forEach(btn => {
+// === Existing Image Delete (STATIC IMAGES RENDERED BY PHP) ===
+document.querySelectorAll('.delete-image').forEach(btn => {
   btn.addEventListener('click', () => {
     const imageId = btn.dataset.id; // ✅ get imageId from data-id
     const roomId = form.querySelector('input[name="roomId"]').value;
@@ -131,9 +131,9 @@ document.addEventListener('DOMContentLoaded', function () {
         })
       })
         .then(res => res.json())
-        .then(data => showResponse(data.message, data.status))
-        .then(() => {
-          if (data.success) btn.closest('.image-item')?.remove();
+        .then(data => {
+          showResponse(data.message, data.status); // ✅ handled here
+          if (data.success) btn.closest('.image-item')?.remove(); // ✅ safe here
         })
         .catch(err => showResponse('Network Error: ' + err, 500));
     });
@@ -141,9 +141,9 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
+
   // === Preview Newly Added Images ===
   function updatePreview() {
-    previewContainer.innerHTML = ''; // clear current previews
     selectedFiles.forEach((file, index) => {
       const wrapper = document.createElement('div');
       Object.assign(wrapper.style, {

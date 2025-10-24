@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const submitBtn = document.getElementById('submitRoomBtn');
   const form = document.getElementById('addRoomForm');
   const closeBtn = document.getElementById('closeResponseBtn');
-
+  submitBtn.disabled = true;
   let selectedFiles = [];
 
   // === File Upload Handling ===
@@ -112,6 +112,8 @@ document.addEventListener('DOMContentLoaded', function () {
   // === Form Submission ===
 submitBtn.addEventListener('click', function (e) {
   e.preventDefault();
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Adding ...';
 
   const formData = new FormData(form);
   if (selectedFiles.length > 0) {
@@ -132,8 +134,12 @@ submitBtn.addEventListener('click', function (e) {
     body: formData
   })
     .then(res => res.json()) // parse JSON
+    
     .then(data => {
       showResponse(data.message, data.status);
+
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Submit';
 
       if (data.success && data.status === 200) {
         previewContainer.innerHTML = '';
