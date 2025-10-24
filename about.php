@@ -97,7 +97,7 @@
             <div class="team-grid">
                 <div class="team-member">
                     <div class="member-image">
-                        <!-- <img src="uploads/rooms/brian.png" alt="General Manager"> -->
+                        <img src="uploads/rooms/Cashier.png" alt="Head of Hospitality">
                     </div>
                     <div class="member-info">
                         <h3>John Brian</h3>
@@ -106,20 +106,20 @@
                 </div>
                 <div class="team-member">
                     <div class="member-image">
-                        <!-- <img src="uploads/rooms/brian.png" alt="Head Chef"> -->
+                        <img src="uploads/rooms/Cashier.png" alt="Head of Hospitality">
                     </div>
                     <div class="member-info">
-                        <h3>Sarah Johnson</h3>
-                        <p>Head Chef</p>
+                       <h3>John Brian</h3>
+                        <p>Cashier</p>
                     </div>
                 </div>
                 <div class="team-member">
                     <div class="member-image">
-                        <!-- <img src="uploads/rooms/Cashier.png" alt="Head of Hospitality"> -->
+                        <img src="uploads/rooms/Cashier.png" alt="Head of Hospitality">
                     </div>
                     <div class="member-info">
-                        <h3>Michael Chen</h3>
-                        <p>Head of Hospitality</p>
+                       <h3>John Brian</h3>
+                        <p>Cashier</p>
                     </div>
                 </div>
             </div>
@@ -194,9 +194,9 @@
                 <div class="footer-column">
                     <h3>Contact Us</h3>
                     <ul>
-                        <li><i class="fas fa-map-marker-alt"></i> Everest Base Camp, Nepal</li>
-                        <li><i class="fas fa-phone"></i> +977 1 1234567</li>
-                        <li><i class="fas fa-envelope"></i> info@mteveresthotel.com</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Opposite Old Family Bank, Kisii</li>
+                        <li><i class="fas fa-phone"></i> +254708315075</li>
+                        <li><i class="fas fa-envelope"></i> mt.everesthotelkisii@gmail.com</li>
                     </ul>
                 </div>
             </div>
