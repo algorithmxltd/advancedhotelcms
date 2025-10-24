@@ -1,3 +1,15 @@
 [2025-10-22 09:31:10] Missing fields: roomPrice, roomNumber, roomType
 [2025-10-22 09:31:32] Missing fields: roomPrice, roomNumber, roomType
 [2025-10-22 10:04:58] Missing fields: roomPrice, roomNumber, roomType
+[2025-10-23 17:32:16] Missing fields: roomPrice, roomNumber, roomType
+[2025-10-23 17:37:49] Missing fields: roomPrice, roomNumber, roomType
+[2025-10-23 17:39:25] Missing fields: roomPrice, roomNumber, roomType
+[2025-10-23 17:41:37] Missing fields: roomPrice, roomNumber, roomType
+[2025-10-23 17:42:19] Missing fields: roomPrice, roomNumber, roomType
+[2025-10-23 17:45:38] Missing fields: roomPrice, roomNumber, roomType
+[2025-10-23 18:07:29] Missing fields: roomPrice, roomNumber, roomType
+[2025-10-23 18:07:30] Missing fields: roomPrice, roomNumber, roomType
+[2025-10-23 18:07:30] Missing fields: roomPrice, roomNumber, roomType
+[2025-10-23 18:07:31] Missing fields: roomPrice, roomNumber, roomType
+[2025-10-23 18:07:31] Missing fields: roomPrice, roomNumber, roomType
+[2025-10-23 18:07:45] Missing fields: roomPrice, roomNumber, roomType

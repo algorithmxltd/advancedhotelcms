@@ -114,6 +114,9 @@ submitBtn.addEventListener('click', function (e) {
   e.preventDefault();
 
   const formData = new FormData(form);
+  if (selectedFiles.length > 0) {
+      selectedFiles.forEach(file => formData.append('roomPhotos[]', file));
+  }
   //formdata
   const debugData = {};
         for (const [key, value] of formData.entries()) {
@@ -124,7 +127,7 @@ submitBtn.addEventListener('click', function (e) {
         console.log('Uploading room data:', JSON.stringify(debugData, null, 2));
 
 
-  fetch('processing/addRoom.php', {
+  fetch('processing/addRoom', {
     method: 'POST',
     body: formData
   })

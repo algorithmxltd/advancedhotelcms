@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const deleteRoomBtn = document.getElementById('delete-room-btn');
   const form = document.getElementById('editRoomForm');
   const closeBtn = document.getElementById('closeResponseBtn');
-  const endpoint = 'processing/editRoom.php';
+  const endpoint = 'processing/editRoom'; // relative to /super/
 
   let selectedFiles = [];
 
@@ -110,45 +110,40 @@ document.addEventListener('DOMContentLoaded', function () {
     updatePreview();
   });
 
-  // === Existing Image Preview + Delete ===
-  function createImagePreview(imagePath, imageId) {
-    const wrapper = document.createElement('div');
-    wrapper.classList.add('image-item');
-    wrapper.dataset.imageId = imageId;
+  // === Existing Image Delete (STATIC IMAGES RENDERED BY PHP) ===
+  document.querySelectorAll('.delete-image').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const imageId = btn.dataset.id; // ✅ get imageId from data-id
+    const roomId = form.querySelector('input[name="roomId"]').value;
+    const imagePath = btn.dataset.path;
 
-    const img = document.createElement('img');
-    img.src = `../uploads/rooms/${imagePath}`;
-    img.alt = 'Room Image';
+    console.log('Deleting Image:', { roomId, imageId, imagePath });
 
-    const deleteBtn = document.createElement('button');
-    deleteBtn.classList.add('delete-image');
-    deleteBtn.textContent = '✖';
+    showConfirm('Delete this image?', (confirmed) => {
+      if (!confirmed) return;
 
-    deleteBtn.addEventListener('click', () => {
-      showConfirm('Delete this image?', (confirmed) => {
-        if (!confirmed) return;
-
-        const roomId = form.querySelector('input[name="roomId"]').value;
-
-        fetch(endpoint, {
-          method: 'POST',
-          body: new URLSearchParams({ action: 'deleteImage', imageId, roomId })
+      fetch(endpoint, {
+        method: 'POST',
+        body: new URLSearchParams({
+          action: 'deleteImage',
+          imageId, // ✅ send imageId instead of imagePath
+          roomId
         })
-          .then(res => res.json())
-          .then(data => {
-            if (data.success) wrapper.remove();
-            else alert(data.message || 'Failed to delete image.');
-          })
-          .catch(err => alert('Error deleting image: ' + err));
-      });
+      })
+        .then(res => res.json())
+        .then(data => showResponse(data.message, data.status))
+        .then(() => {
+          if (data.success) btn.closest('.image-item')?.remove();
+        })
+        .catch(err => showResponse('Network Error: ' + err, 500));
     });
+  });
+});
 
-    wrapper.append(img, deleteBtn);
-    previewContainer?.appendChild(wrapper);
-  }
 
   // === Preview Newly Added Images ===
   function updatePreview() {
+    previewContainer.innerHTML = ''; // clear current previews
     selectedFiles.forEach((file, index) => {
       const wrapper = document.createElement('div');
       Object.assign(wrapper.style, {
@@ -224,7 +219,6 @@ document.addEventListener('DOMContentLoaded', function () {
     e.preventDefault();
 
     const formData = new FormData(form);
-    const roomId = form.querySelector('input[name="roomId"]').value;
     formData.append('action', 'updateDetails');
 
     if (selectedFiles.length > 0) {

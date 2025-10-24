@@ -15,11 +15,7 @@ if (mysqli_num_rows($roomQuery) == 0) {
 $room = mysqli_fetch_assoc($roomQuery);
 
 // Fetch room images
-$imageQuery = mysqli_query($conn, "SELECT * FROM roomImages WHERE roomId = $roomId");
-$roomImages = [];
-while ($img = mysqli_fetch_assoc($imageQuery)) {
-  $roomImages[] = $img['imagePath'];
-}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -41,7 +37,7 @@ while ($img = mysqli_fetch_assoc($imageQuery)) {
         <div class="section-header">
           <h2>Edit Room <?php echo $room['roomNumber']; ?> </h2>
         </div>
-        <!-- Response Box -->
+         <!-- Response Box -->
                 <div id="responseBox" class="response-container" style="display:none;">
                     <p id="responseMessage"></p>
                     <button id="closeResponseBtn" class="response-close">Close</button>
@@ -54,14 +50,22 @@ while ($img = mysqli_fetch_assoc($imageQuery)) {
           <div class="form-group">
             <label>Current Room Photos</label>
             <div class="preview-container" id="previewContainer">
-              <?php foreach ($roomImages as $image): ?>
-                <div class="image-item">
-                  <img src="../<?php echo htmlspecialchars($image); ?>" alt="Room Image">
-                  <button type="button" class="delete-image" id='delete-image-btn' data-path="<?php echo htmlspecialchars($image); ?>">
-                    <i class="fa fa-trash"></i>
-                  </button>
-                </div>
-              <?php endforeach; ?>
+              <?php 
+$imageQuery = mysqli_query($conn, "SELECT id, imagePath FROM roomImages WHERE roomId = $roomId");
+while ($img = mysqli_fetch_assoc($imageQuery)): 
+?>
+  <div class="image-item">
+    <img src="../<?php echo htmlspecialchars($img['imagePath']); ?>" alt="Room Image">
+    <button 
+      type="button" 
+      class="delete-image" 
+      data-id="<?php echo $img['id']; ?>" 
+      data-path="<?php echo htmlspecialchars($img['imagePath']); ?>">
+      <i class="fa fa-trash"></i>
+    </button>
+  </div>
+<?php endwhile; ?>
+
             </div>
             <label>Upload New Photos</label>
             <div class="upload-area" id="dropZone">

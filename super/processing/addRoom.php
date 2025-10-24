@@ -86,7 +86,7 @@ if (!empty($missing)) {
     echo json_encode([
         'success' => false,
         'status'  => 400,
-        'message' => 'Missing required fields',
+        'message' => 'Missing required fields  '. implode(', ', $missing),
         'fields'  => $missing
     ]);
     exit;
