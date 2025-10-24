@@ -1,5 +1,5 @@
 <?php
-// Database connection
+
 $host = 'localhost';
 $dbname = 'mteverest';
 $username = 'root';
