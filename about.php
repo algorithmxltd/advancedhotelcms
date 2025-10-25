@@ -163,49 +163,12 @@
         <div class="container">
             <h2>Ready for an Unforgettable Experience?</h2>
             <p>Book your stay at Mt Everest Hotel and discover the perfect blend of adventure and luxury at the roof of the world.</p>
-            <a href="#" class="cta-btn">Book Your Stay Now</a>
+            <a href="rooms.php" class="cta-btn">Book Your Stay Now</a>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>Mt Everest Hotel</h3>
-                    <p>Experience the peak of luxury with breathtaking mountain views and world-class amenities.</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
-                </div>
-                <div class="footer-column">
-                    <h3>Quick Links</h3>
-                    <ul>
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">Rooms & Suites</a></li>
-                        <li><a href="#">Dining</a></li>
-                        <li><a href="#">Spa & Wellness</a></li>
-                        <li><a href="#">Activities</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Contact Us</h3>
-                    <ul>
-                        <li><i class="fas fa-map-marker-alt"></i> Opposite Old Family Bank, Kisii</li>
-                        <li><i class="fas fa-phone"></i> +254708315075</li>
-                        <li><i class="fas fa-envelope"></i> mt.everesthotelkisii@gmail.com</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="copyright">
-                <p>&copy; 2025 Mt Everest Hotel. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-
+ 
+ <?php include 'includes/footer.php' ?>
     <script>
   
         document.addEventListener('DOMContentLoaded', function() {
