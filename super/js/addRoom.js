@@ -6,7 +6,14 @@ document.addEventListener('DOMContentLoaded', function () {
   const submitBtn = document.getElementById('submitRoomBtn');
   const form = document.getElementById('addRoomForm');
   const closeBtn = document.getElementById('closeResponseBtn');
-  submitBtn.disabled = true;
+
+  let disableButton = submitBtn.disabled = true;
+  if(disableButton){
+    console.log('Button disabled')
+  }else{
+    console.log('Button not disabled')
+  }
+
   let selectedFiles = [];
 
   // === File Upload Handling ===

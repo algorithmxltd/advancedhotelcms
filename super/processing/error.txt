@@ -15,3 +15,33 @@
 [2025-10-23 18:07:45] Missing fields: roomPrice, roomNumber, roomType
 [2025-10-24 16:10:52] Missing fields: roomPrice, roomNumber, roomType
 [2025-10-24 18:31:37] Missing fields: roomPrice, roomNumber, roomType
+[2025-10-28 19:48:48] ACTION: deleteImage | roomId: 15 | Files count: 0
+[2025-10-28 19:48:48] Deleted file: /usr/local/var/www/mteverest2/super/processing/../../uploads/rooms/room_15_69011cd4b6bdc.jpg
+[2025-10-28 19:48:50] ACTION: deleteImage | roomId: 15 | Files count: 0
+[2025-10-28 19:48:51] Deleted file: /usr/local/var/www/mteverest2/super/processing/../../uploads/rooms/room_15_69011cd4a368e.jpg
+[2025-10-28 19:48:54] ACTION: deleteImage | roomId: 15 | Files count: 0
+[2025-10-28 19:48:54] Deleted file: /usr/local/var/www/mteverest2/super/processing/../../uploads/rooms/room_15_69011a52c827f.jpg
+[2025-10-28 19:48:56] ACTION: deleteImage | roomId: 15 | Files count: 0
+[2025-10-28 19:48:56] Deleted file: /usr/local/var/www/mteverest2/super/processing/../../uploads/rooms/room_15_69011a52aa68d.jpg
+[2025-10-28 19:49:00] ACTION: deleteImage | roomId: 15 | Files count: 0
+[2025-10-28 19:49:00] Deleted file: /usr/local/var/www/mteverest2/super/processing/../../uploads/rooms/room_15_690117c09a659.jpg
+[2025-10-28 19:49:02] ACTION: updateDetails | roomId: 15 | Files count: 1
+[2025-10-28 19:49:38] ACTION: updateDetails | roomId: 15 | Files count: 2
+[2025-10-28 19:49:38] Image saved: /uploads/rooms/room_15_69011e525f92f.jpg
+[2025-10-28 19:49:38] Image saved: /uploads/rooms/room_15_69011e528d850.jpg
+[2025-10-28 19:52:21] ACTION: deleteImage | roomId: 15 | Files count: 0
+[2025-10-28 19:52:21] Deleted file: /usr/local/var/www/mteverest2/super/processing/../../uploads/rooms/room_15_69011e528d850.jpg
+[2025-10-28 19:52:24] ACTION: deleteImage | roomId: 15 | Files count: 0
+[2025-10-28 19:52:24] Deleted file: /usr/local/var/www/mteverest2/super/processing/../../uploads/rooms/room_15_69011e525f92f.jpg
+[2025-10-28 19:53:21] ACTION: updateDetails | roomId: 15 | Files count: 2
+[2025-10-28 19:53:21] Image saved: /uploads/rooms/room_15_69011f31b6056.jpg
+[2025-10-28 19:53:21] Image saved: /uploads/rooms/room_15_69011f31d355c.jpg
+[2025-10-28 20:02:08] ACTION: deleteImage | roomId: 15 | Files count: 0
+[2025-10-28 20:02:08] Deleted file: /usr/local/var/www/mteverest2/super/processing/../../uploads/rooms/room_15_69011f31d355c.jpg
+[2025-10-28 20:02:12] ACTION: deleteImage | roomId: 15 | Files count: 0
+[2025-10-28 20:02:12] Deleted file: /usr/local/var/www/mteverest2/super/processing/../../uploads/rooms/room_15_69011f31b6056.jpg
+[2025-10-28 20:02:24] ACTION: updateDetails | roomId: 15 | Files count: 2
+[2025-10-28 20:02:24] Image saved: /uploads/rooms/room_15_690121502b66e.jpg
+[2025-10-28 20:02:24] Image saved: /uploads/rooms/room_15_690121504d09e.jpg
+[2025-10-28 20:02:45] ACTION: updateDetails | roomId: 15 | Files count: 1
+[2025-10-28 20:02:56] ACTION: updateDetails | roomId: 15 | Files count: 1

@@ -1,3 +1,10 @@
+.fa-trash{
+    color: #ff0037;
+    border: none;
+    cursor: pointer;
+}
+
+
 form {
     gap: 10px;
     display: flex;
