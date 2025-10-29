@@ -30,22 +30,6 @@ body {
 
 /* Header Styles */
 
-header {
-    background-color: var(--primary);
-    color: white;
-    padding: 1rem 0;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-.header-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
 .logo {
     font-size: 1.8rem;
     font-weight: 700;
@@ -118,9 +102,9 @@ nav ul li a:hover {
 }
 
 
-/* About Section */
+/* Contact Section */
 
-.about-section {
+.contact-section {
     padding: 5rem 0;
 }
 
@@ -148,184 +132,172 @@ nav ul li a:hover {
     background-color: var(--secondary);
 }
 
-.about-content {
-    display: flex;
-    align-items: center;
+.contact-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     gap: 4rem;
 }
 
-.about-text {
-    flex: 1;
-}
-
-.about-text h3 {
-    font-size: 1.8rem;
-    color: var(--primary);
-    margin-bottom: 1.5rem;
-}
-
-.about-text p {
-    margin-bottom: 1.5rem;
-    color: var(--text-light);
-}
-
-.about-image {
-    flex: 1;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-}
-
-.about-image img {
-    width: 100%;
-    height: auto;
-    display: block;
-    transition: transform 0.5s;
-}
-
-.about-image:hover img {
-    transform: scale(1.05);
-}
-
-
-/* Features Section */
-
-.features {
-    background-color: var(--primary);
-    color: white;
-    padding: 5rem 0;
-}
-
-.features-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+.contact-info {
+    display: flex;
+    flex-direction: column;
     gap: 2rem;
 }
 
-.feature-card {
-    text-align: center;
-    padding: 2rem 1rem;
-    border-radius: 8px;
-    transition: transform 0.3s;
-}
-
-.feature-card:hover {
-    transform: translateY(-10px);
-}
-
-.feature-icon {
-    font-size: 2.5rem;
-    color: var(--secondary);
-    margin-bottom: 1.5rem;
-}
-
-.feature-card h3 {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-}
-
-
-/* Team Section */
-
-.team-section {
-    padding: 5rem 0;
-}
-
-.team-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-}
-
-.team-member {
-    text-align: center;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s;
-}
-
-.team-member:hover {
-    transform: translateY(-10px);
-}
-
-.member-image {
-    height: 300px;
-    overflow: hidden;
-}
-
-.member-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s;
-}
-
-.team-member:hover .member-image img {
-    transform: scale(1.1);
-}
-
-.member-info {
-    padding: 1.5rem;
+.contact-card {
     background-color: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+    transition: transform 0.3s;
 }
 
-.member-info h3 {
+.contact-card:hover {
+    transform: translateY(-5px);
+}
+
+.contact-icon {
+    background-color: var(--primary);
+    color: var(--secondary);
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.contact-details h3 {
     color: var(--primary);
     margin-bottom: 0.5rem;
 }
 
-.member-info p {
-    color: var(--secondary);
+.contact-details p {
+    color: var(--text-light);
+    margin-bottom: 0.5rem;
+}
+
+.contact-form {
+    background-color: white;
+    padding: 2.5rem;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--primary);
     font-weight: 500;
 }
 
+.form-control {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
 
-/* Values Section */
+.form-control:focus {
+    outline: none;
+    border-color: var(--secondary);
+}
 
-.values-section {
+textarea.form-control {
+    min-height: 150px;
+    resize: vertical;
+}
+
+.submit-btn {
+    background-color: var(--secondary);
+    color: var(--primary);
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    width: 100%;
+}
+
+.submit-btn:hover {
+    background-color: #d4b87a;
+    transform: translateY(-2px);
+}
+
+
+/* Map Section */
+
+.map-section {
+    padding: 0 0 5rem;
+}
+
+.map-container {
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    height: 400px;
+}
+
+.map-container iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+
+/* FAQ Section */
+
+.faq-section {
     background-color: #f0f2f5;
     padding: 5rem 0;
 }
 
-.values-grid {
+.faq-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
 }
 
-.value-card {
+.faq-item {
     background-color: white;
     padding: 2rem;
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-    text-align: center;
-    transition: transform 0.3s;
 }
 
-.value-card:hover {
-    transform: translateY(-5px);
-}
-
-.value-icon {
-    font-size: 2rem;
-    color: var(--secondary);
-    margin-bottom: 1.5rem;
-}
-
-.value-card h3 {
+.faq-item h3 {
     color: var(--primary);
     margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.faq-item h3 i {
+    color: var(--secondary);
 }
 
 
 /* CTA Section */
 
 .cta-section {
-    background: linear-gradient(rgba(26, 42, 58, 0.9), rgba(26, 42, 58, 0.9)), url('https://images.unsplash.com/photo-1586375300773-8384e3e4916f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+    background: linear-gradient(rgb(238, 249, 255), rgb(238, 249, 255)), url('uploads\rooms\landingimage.jpeg');
     background-size: cover;
     background-position: center;
-    color: white;
+    color: black;
     text-align: center;
     padding: 5rem 0;
 }
@@ -343,8 +315,8 @@ nav ul li a:hover {
 
 .cta-btn {
     display: inline-block;
-    background-color: #0f87bf;
-    color: white;
+    background-color: var(--secondary);
+    color: var(--primary);
     padding: 1rem 2.5rem;
     border-radius: 4px;
     font-weight: 600;
@@ -447,8 +419,8 @@ footer {
     .hero h1 {
         font-size: 2.5rem;
     }
-    .about-content {
-        flex-direction: column;
+    .contact-content {
+        grid-template-columns: 1fr;
     }
     .section-title h2 {
         font-size: 2rem;

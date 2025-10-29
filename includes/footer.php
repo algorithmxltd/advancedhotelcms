@@ -108,17 +108,17 @@
                             <div class="contact-item">
                                 <span class="contact-icon">📍</span>
                                 <div>
-                                    <p>Everest Base Camp Region</p>
-                                    <p>Solukhumbu District, Nepal</p>
+                                    <p>Opposite Old Family Bank</p>
+                                    <p>Kisii Town</p>
                                 </div>
                             </div>
                             <div class="contact-item">
                                 <span class="contact-icon">📞</span>
-                                <span>+977-1-234-5678</span>
+                                <span>+254708315075</span>
                             </div>
                             <div class="contact-item">
                                 <span class="contact-icon">✉️</span>
-                                <span>info@mteveresthotel.com</span>
+                                <span>mt.everesthotelkisii@gmail.com</span>
                             </div>
                         </div>
                     </div>

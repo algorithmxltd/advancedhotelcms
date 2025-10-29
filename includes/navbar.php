@@ -20,7 +20,7 @@
                         Favourites
                     </a>
                     <a href="about.php" class="nav-link">About Us</a>
-                    <a href="contacts.php" class="nav-link">Contacts</a>
+                    <a href="contactus.php" class="nav-link">Contacts</a>
                 </div>
 
                 <!-- Login Button -->
@@ -51,8 +51,8 @@
                         <span class="heart-icon">♡</span>
                         Favourites
                     </a>
-                    <a href="#" class="mobile-nav-link">About Us</a>
-                    <a href="#" class="mobile-nav-link">Contacts</a>
+                    <a href="about.php" class="mobile-nav-link">About Us</a>
+                    <a href="contacts.php" class="mobile-nav-link">Contacts</a>
                     <button class="mobile-login-btn">
                         <span class="user-icon">👤</span>
                         Login
