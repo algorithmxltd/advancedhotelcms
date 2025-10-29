@@ -10,6 +10,8 @@ document.addEventListener('DOMContentLoaded', function () {
   const closeBtn = document.getElementById('closeResponseBtn');
   const endpoint = 'processing/editRoom';
 
+
+  
   let selectedFiles = [];
   let isProcessing = false;
 

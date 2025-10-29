@@ -23,7 +23,7 @@ $room = mysqli_fetch_assoc($roomQuery);
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Edit Room <?php echo $room['roomNumber']; ?></title>
-   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="../styles/styles.css"> 
   <link rel="stylesheet" href="styles/addRoom.css">
 <link
