@@ -23,7 +23,7 @@
     <section class="hero">
         <div class="container">
             <h1>About Mt Everest Hotel</h1>
-            <p>Discover the story behind our commitment to excellence and the passion that drives us to provide unforgettable experiences at the roof of the world.</p>
+            <p>Discover the story behind our commitment to excellence and the passion that drives us to provide unforgettable experiences at the heart of Kisii Town.</p>
         </div>
     </section>
 
@@ -36,11 +36,13 @@
             <div class="about-content">
                 <div class="about-text">
                     <h3>Experience the Peak of Luxury</h3>
-                    <p>Mt Everest Hotel has been a sanctuary for travelers seeking both adventure and luxury. Nestled in the heart of the Himalayas, our hotel offers breathtaking mountain views and world-class amenities that create an unforgettable
+                    <p>Mt Everest Hotel has been a sanctuary for travelers seeking both adventure and luxury. Nestled in the heart of Kisii Town
+                        , our hotel offers clear views and easy accessibility to Kisii Town and world-class amenities that create an unforgettable
                         hospitality experience.</p>
-                    <p>Our journey began with a simple vision: to create a haven where guests could experience the majestic beauty of the world's highest peak while enjoying the comforts of a luxury retreat. Over the years, we've expanded our facilities
-                        while maintaining our commitment to personalized service and environmental sustainability.</p>
-                    <p>Today, we continue to welcome explorers, mountaineers, and luxury travelers from around the globe, offering them a unique blend of authentic Himalayan culture and five-star hospitality.</p>
+                    <p>Our journey began with a simple vision to create a haven where guests could experience the majestic comfort of a luxury retreat. Over the years, we've expanded our facilities
+                        while maintaining our commitment to personalized service and hospitality sustainability.</p>
+                    <p>Today, we continue to welcome explorers, visitors, and luxury travelers from around the globe, offering them a unique 
+                        blend of authentic Kisii cultural foods and five-star hospitality.</p>
                 </div>
                 <div class="about-image">
                     <img src="uploads/rooms/landingimage.jpeg" alt="Mt Everest Hotel Exterior">
@@ -60,15 +62,15 @@
                     <div class="feature-icon">
                         <i class="fas fa-mountain"></i>
                     </div>
-                    <h3>Breathtaking Views</h3>
-                    <p>Wake up to panoramic views of the world's highest peaks from your private balcony.</p>
+                    <h3>Ampient View of Kisii Town</h3>
+                    <p>Wake up to panoramic views of Kisii Town from your private balcony.</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">
                         <i class="fas fa-concierge-bell"></i>
                     </div>
                     <h3>Luxury Amenities</h3>
-                    <p>Enjoy our world-class facilities including spa, heated pool, and fine dining restaurants.</p>
+                    <p>Enjoy our world-class facilities including ample parking space, and fine dining restaurants offering delicious meals.</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">
@@ -162,7 +164,7 @@
     <section class="cta-section">
         <div class="container">
             <h2>Ready for an Unforgettable Experience?</h2>
-            <p>Book your stay at Mt Everest Hotel and discover the perfect blend of adventure and luxury at the roof of the world.</p>
+            <p>Book your stay at Mt Everest Hotel and discover the perfect blend with the kisii culture.</p>
             <a href="rooms.php" class="cta-btn">Book Your Stay Now</a>
         </div>
     </section>

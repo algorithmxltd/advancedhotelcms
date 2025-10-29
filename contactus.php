@@ -112,7 +112,7 @@
                 <p>Located at the base of the world's highest peak for an unforgettable experience</p>
             </div>
             <div class="map-container">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5686016.5327611!2d82.188915275!3d27.988120999999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39be6cc8f5ce3cf1%3A0x14a9f7c50b8d9c78!2sMount%20Everest!5e0!3m2!1sen!2snp!4v1690386787897!5m2!1sen!2snp" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d63839.96811530207!2d34.732450399999995!3d-0.6818553999999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182c78e2458a26a9%3A0x6c6d9d472dcdc3c5!2sKisii%2C%20Kenya!5e0!3m2!1sen!2ske!4v1690386787897!5m2!1sen!2ske" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
         </div>
     </section>
